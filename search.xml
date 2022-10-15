@@ -74,4 +74,58 @@
         <tag>hexo</tag>
       </tags>
   </entry>
+  <entry>
+    <title>APP性能优化的一些建议</title>
+    <url>/2022/10/15/APP%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9A%84%E4%B8%80%E4%BA%9B%E5%BB%BA%E8%AE%AE/</url>
+    <content><![CDATA[<p>除了利用性能测试工具分析性能应用，寻找优化控件，开发者在开发过程中，就应该注意一些性能优化技巧，养成良好的开发习惯，减轻性能优化的负担。下面是一些优化建议：</p>
+<span id="more"></span>
+<p>1.在LinearLayout和RelativeLayout都可以完成布局的情况下优先选择LinearLayout，可以减少View的层级，但是注意相同组件可能RelativeLayout绘制时间长<br>2.onDraw中不要创建新的局部对象，onDraw方法中不要做耗时的任务<br>3.不要在主线程进行网络访问&#x2F;大文件的IO操作<br>4.绘制UI时，尽量减少绘制UI层次；减少不必要的view嵌套<br>5.当我们的布局是用的FrameLayout的时候，我们可以把它改成merge，可以避免自己的帧布局和系统的ContentFrameLayout帧布局重叠造成重复计算（measure和layout）<br>6.在view层级相同的情况下，尽量使用LinearLayout而不是RelativeLayout；因为RelativeLayout在测量的时候会测量两次，而LinearLayout测量一次<br>7.删除控件中无用的属性<br>8.布局复用，比如listview布局复用<br>9.尽量避免过度绘制（overdraw）比如：背景经常容易造成过度绘制，由于我们布局设置了背景，溶蚀用到MaterialDesign的主题会默认给一个背景。这时应该把主题添加的背景去掉；还有移除XML中非必须的背景<br>10.自定义view优化，使用canvas.clipRect()来帮助系统识别那些可见的区域，只有在这个区域内才会被绘制。也是避免过度绘制。<br>11.启动优化，启动速度的监控，发现影响启动速度的问题所在，优化启动逻辑，提高应用的启动速度。比如闪屏页面，合理优化布局，加载逻辑优化，数据准备。<br>12.合理的刷新机制，尽量减少刷新次数，尽量避免后台有高的CPU线程运行，缩小刷新区域。</p>
+]]></content>
+      <categories>
+        <category>android</category>
+      </categories>
+      <tags>
+        <tag>android</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>EditText:android:focusable和android:focusableInTouchMode的区别</title>
+    <url>/2022/10/15/EditText-android-focusable%E5%92%8Candroid-focusableInTouchMode%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+    <content><![CDATA[<p>本文向大家介绍EditText:android:focusable和android:focusableInTouchMode的区别，主要包括EditText:android:focusable和android:focusableInTouchMode的区别使用实例，应用技巧，基本知识点总结和需要注意事项，具有一定的参考价值。<br>android:focusable</p>
+<span id="more"></span>
+<p>之所以有这个属性主要是因为android系统不仅仅是针对手机的，有可能在电视，手表等等的非触摸输入设备上（比如android TV）这些设备只有物理上下键不具备触摸功能，<br>那么当把这个属性值设置为true的时候，比如你按了一下向下键，屏幕上的内容就会对应选中一个向下的控件（如果这个控件设置android:focusable&#x3D;true的话），否则就会选中下一个具备focusable能力的控件。<br>android:focusableInTouchMode<br>与上面的那种情况相反，如果是针对手机开发的话，那么大部分手机都具备触摸功能，那么这个属性有什么作用呢？<br>从交互的角度来讲，焦点的作用其实就是为了提示用户当前控件已经被选中了，可以进行下一步的操作。比如在android5.0上新退出的Material Design效果上面，如果一个EditText被选中了，那么它的输入框就会更换颜色以示区别，但是在手机开发中并不是所有的控件都需要有选中的这种状态，通常在点击后可能只想达到某种效果（如点击按钮就是想触发点击事件，不需要有选中效果），那么这个时候，如果把android:focusableInTouchMode设置为true，此时执行的就是更换焦点操作，相应的事件就无法得到及时相应，这样的体验就会很不好。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;</span><br><span class="line">    android:background=&quot;#ddffff&quot;</span><br><span class="line">    android:gravity=&quot;center&quot;</span><br><span class="line">    android:orientation=&quot;vertical&quot;</span><br><span class="line">    android:focusableInTouchMode=&quot;true&quot;</span><br><span class="line">    &gt;</span><br><span class="line">    </span><br><span class="line">    &lt;View</span><br><span class="line">        android:id=&quot;@+id/view_test&quot;</span><br><span class="line">        android:layout_width=&quot;100dip&quot;</span><br><span class="line">        android:layout_height=&quot;100dip&quot;</span><br><span class="line">        android:focusableInTouchMode=&quot;true&quot;</span><br><span class="line">        android:background=&quot;#ff0000&quot;</span><br><span class="line">        /&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;Button</span><br><span class="line">        android:id=&quot;@+id/bt_test&quot;</span><br><span class="line">        android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">        android:layout_marginBottom=&quot;20dp&quot;</span><br><span class="line">        android:text=&quot;click me&quot;</span><br><span class="line">        android:focusableInTouchMode=&quot;true&quot;</span><br><span class="line">        /&gt;</span><br><span class="line">&lt;/LinearLayout&gt;</span><br></pre></td></tr></table></figure>
+<p>我们分别为LinearLayout，View，Button都增加一个触摸时能够获取到焦点的属性</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">package com.yuneec.testdemo;</span><br><span class="line">import android.os.Bundle;import android.support.v7.app.AppCompatActivity;import android.util.Log;import android.view.View;import android.widget.Button;</span><br><span class="line">public class MainActivity extends AppCompatActivity &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    private View view_test;</span><br><span class="line">    private Button bt_test;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">        view_test = findViewById(R.id.view_test);</span><br><span class="line">        bt_test = (Button) findViewById(R.id.bt_test);</span><br><span class="line"></span><br><span class="line">        view_test.setOnClickListener(new View.OnClickListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onClick(View v) &#123;</span><br><span class="line">                Log.i(&quot;xp.chen&quot;, &quot;I am view, click................&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        view_test.setOnFocusChangeListener(new View.OnFocusChangeListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onFocusChange(View v, boolean hasFocus) &#123;</span><br><span class="line">                Log.i(&quot;xp.chen&quot;, &quot;==========================================&quot;);</span><br><span class="line">                Log.i(&quot;xp.chen&quot;, &quot;I am view, focus: &quot;+view_test.isFocused());</span><br><span class="line">                Log.i(&quot;xp.chen&quot;, &quot;I am button, focus: &quot;+bt_test.isFocused());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        bt_test.setOnClickListener(new View.OnClickListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onClick(View v) &#123;</span><br><span class="line">                Log.i(&quot;xp.chen&quot;, &quot;I am button, click................&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        bt_test.setOnFocusChangeListener(new View.OnFocusChangeListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onFocusChange(View v, boolean hasFocus) &#123;</span><br><span class="line">                Log.i(&quot;xp.chen&quot;, &quot;==========================================&quot;);</span><br><span class="line">                Log.i(&quot;xp.chen&quot;, &quot;I am button, focus: &quot;+bt_test.isFocused());</span><br><span class="line">                Log.i(&quot;xp.chen&quot;, &quot;I am view, focus: &quot;+view_test.isFocused());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们先点击View，发现View的onClick事件未打印，再点击view，发现view的onclick事件可以正常打印了。<br>然后点击button，发现button的onclick事件也未打印，再点击一次button，发现button的onclick事件可以正常打印了。<br>这说明第一次点击view或者button，知识单纯将焦点转换到了view和button上，此时会调用onFocusChangeListener方法，只有当再次点击的时候才会调用onClick方法。<br>因此，这种操作对Button来说是多余的，而button的android:focusableInTouchMode属性默认也就是false。<br>但对于EditText这种控件来说就不一样了，比方说一个界面上有很多EditText，在你点击了其中一个的时候，你必须先告知用户他点击的是哪一个，这样用户才不会输错，事实上在android源代码里面，EditText的focusableInTouchMode属性默认也就是True。</p>
+]]></content>
+      <categories>
+        <category>android</category>
+      </categories>
+      <tags>
+        <tag>android</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ADB(android调试桥)</title>
+    <url>/2022/10/15/ADB-android%E8%B0%83%E8%AF%95%E6%A1%A5/</url>
+    <content><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>android调试桥（adb）是一种功能多样的命令行工具，可让您与设备进行通信。adb命令可用于执行各种设备操作（例如安装和调试应用）,并提供对Unix shell（可用来在设备商运行各种命令）的访问权限。它是一种客户端-服务器程序，包括以下三个组件：<br>客户端：用于发送命令。客户端在开发机器上运行。您可以通过发出adb命令从命令行终端调用客户端。<br>守护程序（adbd）：用于在设备商运行命令。守护程序在每个设备上作为后台进程运行。<br>服务器：用于管理客户端与守护程序之间的通信。服务器在开发机器上作为后台进程运行。</p>
+<span id="more"></span>
+<h2 id="常用的命令："><a href="#常用的命令：" class="headerlink" title="常用的命令："></a>常用的命令：</h2><h3 id="查询设备"><a href="#查询设备" class="headerlink" title="查询设备"></a>查询设备</h3><p>在发出adb命令之前，了解哪些设备实例已经了解到adb服务器会很有帮助<br>adb devices -l</p>
+<h3 id="将命令发送至特定设备"><a href="#将命令发送至特定设备" class="headerlink" title="将命令发送至特定设备"></a>将命令发送至特定设备</h3><p>如果有多个命令正在运行，发出adb命令时必须指定目标设备。为此，请使用devices命令获取目标设备的序列号。获得序列号时，请结合-s选项和adb命令来指定序列号。<br>adb -s xxxxxxxxx installl helloworld.apk</p>
+<h3 id="安装应用"><a href="#安装应用" class="headerlink" title="安装应用"></a>安装应用</h3><p>使用adb的install命令在模拟器或链接的设备上安装APK<br>adb install path_to_apk</p>
+<h3 id="设置端口转发"><a href="#设置端口转发" class="headerlink" title="设置端口转发"></a>设置端口转发</h3><p>可以使用forward命令设置任意端口转发，将特定主机端口上的请求转发到设备上其他端口。以下实例设置了主机端口6100到设备端口7100的转发：<br>adb forward tcp:6100 tcp:7100</p>
+<h3 id="将文件复制到设备-x2F-从设备复制文件"><a href="#将文件复制到设备-x2F-从设备复制文件" class="headerlink" title="将文件复制到设备&#x2F;从设备复制文件"></a>将文件复制到设备&#x2F;从设备复制文件</h3><p>可以使用pull和push命令将文件复制到设备或从设备复制文件。与install命令（仅将apk文件复制到特定位置）不同，使用pull和push命令可将任意目录和文件复制到设备中任何位置。<br>从设备中复制某个文件或目录（及其子目录）,使用以下命令：<br>Adb pull remote local<br>如需将某个文件或目录复制到设备，使用以下命令：<br>Adb push local remote<br>将local和remote替换为开发机器（本地）和设备（远程）上的目标文件&#x2F;目录的路径：<br>Adb push foo.txt &#x2F;sdcard&#x2F;foo.txt</p>
+<h3 id="停止adb服务器"><a href="#停止adb服务器" class="headerlink" title="停止adb服务器"></a>停止adb服务器</h3><p>在某些情况下，您可能需要终止adb服务器进程，然后重启以解决问题（例如，如果adb不响应命令）。<br>如需停止adb服务器，请使用adb kill-server命令。然后，您可以通过发出其他任何adb命令来重启服务器。</p>
+<h3 id="发出adb命令"><a href="#发出adb命令" class="headerlink" title="发出adb命令"></a>发出adb命令</h3><p>可以从开发机器上的命令行发出adb命令，也可以通过脚本发出，用法如下：<br>adb [-d | -e | -s  serial_number] command<br>如果只有一个模拟器在运行或者只连接了一个设备，系统会默认将adb命令发送到该设备，如果有多个模拟器在运行并且&#x2F;或者连接了多个设备，您需要使用-d、-e、-s选项指定应向其发送命令的目标设备，您可以使用以下命令来查看所有支持的adb命令的详细列表：<br>adb –help</p>
+<h3 id="发出shell命令"><a href="#发出shell命令" class="headerlink" title="发出shell命令"></a>发出shell命令</h3><p>可以使用shell命令通过adb发出设备命令，也可以启交互式shell。如需发出单个命令，请使用shell命令，如下所示：<br>adb shell shell_command<br>要在设备上启动交互式shell，请使用shell命令，如下：<br>adb shell<br>要退出交互式shell，按初crtl+D或者输入exit</p>
+<h3 id="从手机上导出应用软件apk文件"><a href="#从手机上导出应用软件apk文件" class="headerlink" title="从手机上导出应用软件apk文件"></a>从手机上导出应用软件apk文件</h3><p>第一步：查看app包名<br>adb shell ammonitor<br>这个时候点击运行手机上要看的包名的app，就可以看到启动的包名了<br>第二步：查看包存放的路径<br>adb shell pm path com.eda.abcd<br>这个时候就可以看到该应用程序的包存放路径<br>第三步：使用adb pull + 包存放路径<br>将apk导出到电脑</p>
+]]></content>
+      <categories>
+        <category>android</category>
+      </categories>
+      <tags>
+        <tag>android</tag>
+      </tags>
+  </entry>
 </search>
