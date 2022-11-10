@@ -128,4 +128,73 @@
         <tag>android</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Android工程项目结构解析</title>
+    <url>/2022/11/10/Android%E5%B7%A5%E7%A8%8B%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E8%A7%A3%E6%9E%90/</url>
+    <content><![CDATA[<p>android工程的重点目录解析</p>
+<span id="more"></span>
+
+<p><img src="https://s3.bmp.ovh/imgs/2022/11/10/7b843f31f0a99719.png"></p>
+<p>接下来对关键部分进行讲解：<br>Java，我们写Java代码的地方，业务功能都在这里实现<br>res，我们存放各种资源文件的地方，有图片，字符串，动画，音频，还有各种形式的xml文件</p>
+<h1 id="一、res资源文件夹介绍："><a href="#一、res资源文件夹介绍：" class="headerlink" title="一、res资源文件夹介绍："></a>一、res资源文件夹介绍：</h1><p>注：说道这个res目录，另外还有一个assets目录，虽然这里没有，但是我们可以自己创建，两者的区别在于是否前者下所有的资源文件都会在R.java文件下生成对应的资源id，而后者并不会；前者我们可以通过资源id访问到对应的资源；而后者则需要我们通过AssetManager以二进制的形式来读取了。这个R文件可以理解为字典，res下每个资源都会在这里生成一个唯一的id。<br>分辨率不同的系统会根据屏幕的分辨率来选择hdpi,mdpi,xmdpi,xxhdpi下的对应图片，所以你解压别人的apk可以看到上述目录统一名称的图片，在四个文件夹下都有，只是大小和像素不一样而已，当然，这也不是绝对的，比如我们把所有图片都丢到hdpi下的话，本该加载ldpi文件夹下的图片资源，但是ldpi下没有，那么加载的还会使hdpi下的图片，另外还有一种情况，比如hdpi，mdpi目录下有ldpi下没有，那么会加载mdpi中的资源！原则是使用最接近密度级别，另外如果你想禁止android不跟随屏幕密度加载不同文件夹的资源，只需在AndroidManifest.xml文件中添加android:anyDensity&#x3D;”false”字段即可。</p>
+<h2 id="1-图片资源"><a href="#1-图片资源" class="headerlink" title="1.图片资源"></a>1.图片资源</h2><ul>
+<li>drawable：存放各种位图文件，(.png，.jpg，.9png，.gif等)除此之外可能是一些其他的drawable类型的XML文件</li>
+<li>mipmap-hdpi：高分辨率，一般我们把图片丢这里</li>
+<li>mipmap-mdpi：中等分辨率，很少，除非兼容的的手机很旧</li>
+<li>mipmap-xhdpi：超高分辨率，手机屏幕材质越来越好，以后估计会慢慢往这里过渡</li>
+<li>mipmap-xxhdpi：超超高分辨率，这个在高端机上有所体现</li>
+</ul>
+<h2 id="2-布局资源"><a href="#2-布局资源" class="headerlink" title="2.布局资源"></a>2.布局资源</h2><ul>
+<li>layout：该目录下存放的就是我们的布局文件，另外在一些特定的机型上，我们做屏幕适配，比如480*320这样的手机，我们会另外创建一套布局，就行：layout-480x320这样的文件夹！</li>
+</ul>
+<h2 id="3-菜单资源"><a href="#3-菜单资源" class="headerlink" title="3.菜单资源"></a>3.菜单资源</h2><ul>
+<li>menu：在以前有物理菜单按钮，即menu键的手机上，用的较多，现在用的并不多，菜单项相关的资源xml可在这里编写，不知道谷歌会不会出新的东西来替代菜单了~</li>
+</ul>
+<h2 id="4-values目录"><a href="#4-values目录" class="headerlink" title="4.values目录"></a>4.values目录</h2><ul>
+<li>demens.xml：定义尺寸资源</li>
+<li>string.xml：定义字符串资源</li>
+<li>styles.xml：定义样式资源</li>
+<li>colors.xml：定义颜色资源</li>
+<li>arrays.xml：定义数组资源</li>
+<li>attrs.xml：自定义控件时用的较多，自定义控件的属性！</li>
+<li>theme主题文件，和styles很相似，但是会对整个应用中的Actvitiy或指定Activity起作用，一般是改变窗口外观的！可在Java代码中通过setTheme使用，或者在Androidmanifest.xml中为&lt;application…&gt;添加theme的属性！ PS:你可能看到过这样的values目录：values-w820dp，values-v11等，前者w代表平板设备，820dp代表屏幕宽度；而v11这样代表在API(11)，即android 3.0后才会用到的！</li>
+</ul>
+<h2 id="5-raw目录"><a href="#5-raw目录" class="headerlink" title="5.raw目录"></a>5.raw目录</h2><p>用于存放各种原生资源（音频，视频，一些XML文件等），我们可以通过openRawResource(int id)来获得资源的二进制流，其实和Assets差不多，不过这里面的资源会在R文件里生成一个资源id而已<br>6.最后还有动画的，动画有两种：属性动画和补间动画</p>
+<ul>
+<li>animator：存放属性动画的XML文件</li>
+<li>anim：存放补间动画的XML文件</li>
+</ul>
+<h1 id="二、深入了解三个文件"><a href="#二、深入了解三个文件" class="headerlink" title="二、深入了解三个文件"></a>二、深入了解三个文件</h1><p>工程中三个比较重要的文件：MainActivity.java， 布局文件：activity_main.xml和配置文件AndroidMainfest.xml<br>代码分析：</p>
+<p>MainAcitivity.java<br><img src="https://s3.bmp.ovh/imgs/2022/11/10/48c14edb5816ca14.png"><br>activity_main.xml：<br><img src="https://s3.bmp.ovh/imgs/2022/11/10/e8bfda21011a2f54.png"><br>AndroidMainfest.xml配置文件：<br><img src="https://s3.bmp.ovh/imgs/2022/11/10/d4a0c330f888bfbe.png"><br>①如果app包含其他组件的话,都要使用类型说明语法在该文件中进行声明 Server:<br>②权限的声明: 在该文件中显式地声明程序需要的权限,防止app错误地使用服务, 不恰当地访问 资源,最终提高android app的健壮性 android.permission.SEND_SMS 有这句话表示app需要使用发送信息的权限,安装的时候就会提示用户, 相关权限可以在sdk参考手册查找！</p>
+]]></content>
+      <categories>
+        <category>android</category>
+      </categories>
+      <tags>
+        <tag>android</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Android横竖屏切换以及对应布局加载</title>
+    <url>/2022/11/10/Android%E6%A8%AA%E7%AB%96%E5%B1%8F%E5%88%87%E6%8D%A2%E4%BB%A5%E5%8F%8A%E5%AF%B9%E5%BA%94%E5%B8%83%E5%B1%80%E5%8A%A0%E8%BD%BD/</url>
+    <content><![CDATA[<p>如果要让软件在横竖屏之间切换，由于横竖屏的宽高会发生转换，有可能会要求不同的布局。</p>
+<span id="more"></span>
+<h1 id="1-横竖屏切换连带横竖屏布局问题："><a href="#1-横竖屏切换连带横竖屏布局问题：" class="headerlink" title="1.横竖屏切换连带横竖屏布局问题："></a>1.横竖屏切换连带横竖屏布局问题：</h1><p>如果要让软件在横竖屏之间切换，由于横竖屏的宽高会发生转换，有可能会要求不同的布局。<br>可以通过一下两种方法切换布局：<br>1）在res目录下建立layout-land和layout-port目录，相应的layout文件名不变，比如：layout-land是横屏的，layout-port是竖屏的时候，其他的不用管，横竖屏切换时程序调用Activity的onCreate方法中的setOnContent(xxx)，并自动加载相应的布局。<br>2）假如布局资源不按照如上设置，则可以通过Java代码来判断当前是横屏还是竖屏然后来加载相应的xml布局文件。因为当屏幕变为横屏的时候，系统会重新加载当前Activity的onCreate方法（也就是说：该Activity的声明周期要重头开始），你可以把以下方法放在你的onCreate中来检查当前的方法，然后可以让你的setContentVIew来载入不同的layout</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Private int orientation;</span><br><span class="line">Orientation = getResources().getConfiguration().orientation;</span><br></pre></td></tr></table></figure>
+<h1 id="2-强制设定屏幕的横竖屏方向"><a href="#2-强制设定屏幕的横竖屏方向" class="headerlink" title="2.强制设定屏幕的横竖屏方向"></a>2.强制设定屏幕的横竖屏方向</h1><p>android横竖屏切换在手机开发中比较常见，很多软件在开发过程中为了避免横竖屏切换时引发不必要的麻烦，通常要强制设置横竖屏的方向，通过在androidMainfest.xml中设置activity中的android:screenOrientation属性值来实现。<br>比如下列设置：<br>横屏显示设置，android:screenOrientation&#x3D;”landscape”<br>竖屏显示设置，android:screenOrientation&#x3D;”portrait”<br>当然上述修改也可以在Java代码中通过代码实现：（android屏幕的切换会重启Activity，所以在Activity销毁前保存当前活动的状态，并在Activity再次Create的时候载入配置）<br>setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)</p>
+<h1 id="3-拦截横竖屏切换-需要的配置文件：onConfigurationChanged"><a href="#3-拦截横竖屏切换-需要的配置文件：onConfigurationChanged" class="headerlink" title="3.拦截横竖屏切换 需要的配置文件：onConfigurationChanged"></a>3.拦截横竖屏切换 需要的配置文件：onConfigurationChanged</h1><p>Activity每次横竖屏切换都会重新调用onPause-&gt;onStop-&gt;onDestory-&gt;onCreate-&gt;onStart-&gt;onResume（为此内容和数据要保存和读取，否则转屏之前内容将就会消失了）<br>很多时候这样的结果让程序繁琐，为此android提供了在mainfest中设置android:configChanges属性，从而让activity不延续上述的重建流程；<br>方式一：在android工程的Mainfest.xml中配置activity：android:configChanges&#x3D;”keyboardHidden|orientation”，横竖屏切换之后就不会去执行OnCreate函数了，而是会去调用onConfigurationChanged()这样就能控制横竖屏的切换了。<br>方式二：用户可以在Activity或View的：onConfigurationChanged(configuration config)，函数中获取当前横竖屏参数，至于其调用顺序跟touch时间的传递顺序相似，不过他没有消费事件的概念，会顺次调用到每一个onConfigurationChanged函数。<br>需要重写Activity的onConfigurationChanged方法。实现方式如下，不需要做太多的内容：<br>需要注意的是，onConfigurationChanged函数中只能获得横竖屏切换后的参数，在该函数中获取不到新的Layout和控件尺寸位置信息，如果要处理尺寸和位置信息，必须通过消息异步或者延时调用；</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Override</span><br><span class="line"></span><br><span class="line">       public void onConfigurationChanged(Configuration newConfig) &#123;</span><br><span class="line"></span><br><span class="line">               super.onConfigurationChanged(newConfig);</span><br><span class="line"></span><br><span class="line">               if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) &#123;</span><br><span class="line"></span><br><span class="line">                       // land do nothing is ok</span><br><span class="line"></span><br><span class="line">               &#125; else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) &#123;</span><br><span class="line"></span><br><span class="line">                       // port do nothing is ok</span><br><span class="line"></span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+<h1 id="4-自适应切换屏幕："><a href="#4-自适应切换屏幕：" class="headerlink" title="4.自适应切换屏幕："></a>4.自适应切换屏幕：</h1><p>如果想让它启动的时候是横屏的话就横屏表示，纵屏的话就纵屏表示，然后手机切换横竖屏就不能用了该怎么解决呢？<br>首先：在Mainfest.xml中追加android:screenOrientation&#x3D;”sensor”<br>android:configurationChanges&#x3D;”orientation|keyboardHidden”<br>然后：取得屏幕的长和宽，进行比较设置横竖屏的变量。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Display display = getWindowManager().getDefaultDisplay();</span><br><span class="line">    int width = display.getWidth();</span><br><span class="line">    int height = display.getHeight();</span><br><span class="line">    if (width &gt; height) &#123;</span><br><span class="line">      orientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE; // 横屏</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      orientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT; // 竖屏</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">然后：在onConfigurationChanged()函数中追加this.setRequestedOrientation(orientation)</span><br><span class="line">public void onConfigurationChanged(Configuration newConfig) &#123; </span><br><span class="line">         super.onConfigurationChanged(newConfig); </span><br><span class="line">         this.setRequestedOrientation(orientation); </span><br><span class="line">       &#125; </span><br></pre></td></tr></table></figure>
+<p>但是这样的话你切到别的画面的时候再回到原画面，它就仍然是横的或者是纵的。怎么让它从别的屏幕回来后，又重新横竖屏布局呢？<br>只要在onResume()中再设定下就行了，但是这个仅仅只是支持横竖屏只有一个layout的；</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">protected void onResume() &#123;</span><br><span class="line">    orientation = ActivityInfo.SCREEN_ORIENTATION_USER;</span><br><span class="line">    this.setRequestedOrientation(orientation);</span><br><span class="line">    Display display = getWindowManager().getDefaultDisplay();</span><br><span class="line">    int width = display.getWidth();</span><br><span class="line">    int height = display.getHeight();</span><br><span class="line">    if (width &gt; height) &#123;</span><br><span class="line">      orientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      orientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;</span><br><span class="line">    &#125;</span><br><span class="line">    super.onResume();</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>有三点注意：<br>1.不设置activity的android:confiChanges时，切屏会重新调用各个生命周期，切横屏时会执行一次，切竖屏时会执行两次<br>2.设置Activity的android:configChanges&#x3D;”orientation”时，切屏还是会重新调用各个生命周期，切横竖屏时只会执行一次<br>3.设置activity的android:configChanges&#x3D;”orientation|keyboardHidden”时，切屏不会重新调用各个生命周期，只会执行onConfigurationChanged方法</p>
+]]></content>
+      <categories>
+        <category>android</category>
+      </categories>
+      <tags>
+        <tag>android</tag>
+      </tags>
+  </entry>
 </search>
