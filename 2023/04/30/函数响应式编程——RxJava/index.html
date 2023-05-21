@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="hexo," />
+  <meta name="keywords" content="RxJava," />
 
 
 
@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="什么是hexo？Hexo是一款基于Node.js的静态博客框架，特点是快速，简介并且高效的博客框架，Hexo使用Markdown解析文章，在几秒内，即可利用靓丽的主题生成静态网页。它可以方便的生成静态网页托管在GitHub和其他托管平台上，是搭建博客的首选框架。">
+<meta name="description" content="函数响应式编程是一种编程范式。我们常见的编程范式由命令式编程、函数式编程和逻辑式编程。我们常见的面向对象编程是一种命令式编程。命令式编程是面向计算机硬件的抽象，有变量、赋值语句、表达式和控制语句。而函数式编程是面向数学的抽象，将计算描述为一种表达式求职，函数可以在任何地方定义，并且可以对函数进行组合。响应式编程是一种面向数据流和变化传播的编程范式，数据更新是相关联的。把函数式编程里的一套思路和响应">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GitHub+Hexo搭建个人博客网站">
-<meta property="og:url" content="https://thefu.top/2022/09/18/GitHub-Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/index.html">
+<meta property="og:title" content="函数响应式编程——RxJava">
+<meta property="og:url" content="https://thefu.top/2023/04/30/%E5%87%BD%E6%95%B0%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BC%96%E7%A8%8B%E2%80%94%E2%80%94RxJava/index.html">
 <meta property="og:site_name" content="TheFu&#39;s Blog">
-<meta property="og:description" content="什么是hexo？Hexo是一款基于Node.js的静态博客框架，特点是快速，简介并且高效的博客框架，Hexo使用Markdown解析文章，在几秒内，即可利用靓丽的主题生成静态网页。它可以方便的生成静态网页托管在GitHub和其他托管平台上，是搭建博客的首选框架。">
+<meta property="og:description" content="函数响应式编程是一种编程范式。我们常见的编程范式由命令式编程、函数式编程和逻辑式编程。我们常见的面向对象编程是一种命令式编程。命令式编程是面向计算机硬件的抽象，有变量、赋值语句、表达式和控制语句。而函数式编程是面向数学的抽象，将计算描述为一种表达式求职，函数可以在任何地方定义，并且可以对函数进行组合。响应式编程是一种面向数据流和变化传播的编程范式，数据更新是相关联的。把函数式编程里的一套思路和响应">
 <meta property="og:locale">
-<meta property="article:published_time" content="2022-09-18T04:53:53.000Z">
-<meta property="article:modified_time" content="2022-10-12T13:17:02.903Z">
+<meta property="article:published_time" content="2023-04-30T13:41:28.000Z">
+<meta property="article:modified_time" content="2023-05-21T13:30:11.016Z">
 <meta property="article:author" content="thefu">
-<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="RxJava">
 <meta name="twitter:card" content="summary">
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://thefu.top/2022/09/18/GitHub-Hexo搭建个人博客网站/"/>
+  <link rel="canonical" href="https://thefu.top/2023/04/30/函数响应式编程——RxJava/"/>
 
 
 
 
 
-  <title>GitHub+Hexo搭建个人博客网站 | TheFu's Blog</title>
+  <title>函数响应式编程——RxJava | TheFu's Blog</title>
   
 
 
@@ -287,7 +287,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://thefu.top/2022/09/18/GitHub-Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/">
+    <link itemprop="mainEntityOfPage" href="https://thefu.top/2023/04/30/%E5%87%BD%E6%95%B0%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BC%96%E7%A8%8B%E2%80%94%E2%80%94RxJava/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -304,7 +304,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">GitHub+Hexo搭建个人博客网站</h1>
+          <h1 class="post-title" itemprop="name headline">函数响应式编程——RxJava</h1>
         
 
         <div class="post-meta">
@@ -316,8 +316,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-18T12:53:53+08:00">
-                2022-09-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-04-30T21:41:28+08:00">
+                2023-04-30
               </time>
             
 
@@ -326,28 +326,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/hexo%E5%8D%9A%E5%AE%A2/" itemprop="url" rel="index">
-                    <span itemprop="name">hexo博客</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -376,26 +354,17 @@
       
 
       
-        <h2 id="什么是hexo？"><a href="#什么是hexo？" class="headerlink" title="什么是hexo？"></a>什么是hexo？</h2><p>Hexo是一款基于Node.js的静态博客框架，特点是快速，简介并且高效的博客框架，Hexo使用Markdown解析文章，在几秒内，即可利用靓丽的主题生成静态网页。它可以方便的生成静态网页托管在GitHub和其他托管平台上，是搭建博客的首选框架。</p>
-<span id="more"></span>
-<h2 id="什么是github？"><a href="#什么是github？" class="headerlink" title="什么是github？"></a>什么是github？</h2><p>GitHub是一个在线软件源代码托管服务平台，使用Git作为版本控制软件，是世界上最大的代码托管网站和开源社区。我们使用的是github上的一个服务，GitHub Pages，它是由GitHub提供的一个网页寄存服务，可以用于存放静态网页，包括博客，项目文档甚至整本书。一般GitHub Pages使用github.io的子域名，但是用户也可以使用第三方域名。</p>
-<h2 id="搭建步骤："><a href="#搭建步骤：" class="headerlink" title="搭建步骤："></a>搭建步骤：</h2><h3 id="1-GitHub创建个人仓库"><a href="#1-GitHub创建个人仓库" class="headerlink" title="1.GitHub创建个人仓库"></a>1.GitHub创建个人仓库</h3><p>登录到GitHub，如果没有GitHub账号，使用你的邮箱注册GitHub账号，点击GitHub中的New repository创建新仓库，仓库名应该为：“用户名.github,io”这个用户名使用你的github账号名称代替，这是一个相对固定的写法。</p>
-<h3 id="2-安装git"><a href="#2-安装git" class="headerlink" title="2.安装git"></a>2.安装git</h3><p>什么是git？简单来说Git是开源的分布式版本控制系统，用于敏捷高效的处理项目。我们网站在本地搭建好了，需要使用Git同步到GitHub上，推荐一个巨好的<a target="_blank" rel="noopener" href="http://git.oschina.net/progit/index.html">git教程</a>。<br>安装成功后，将你的Git与GitHub账号绑定，鼠标右击打开Git Bash，设置user.name和user.eamil配置信息：<br>git config –global user.name “你的GitHub用户名”<br>git config –global user.email “你的GitHub注册邮箱”<br>生成ssh密钥文件：<br>ssh-keygen -t rsa -C “你的GitHub注册邮箱”<br>然后直接三个回车即可，默认不需要设置密码<br>然后找到生成的.ssh文件夹中的id_rsa.pub密钥，将内容全部复制<br>打开GitHub_Settings_keys页面，新建new SSH Key<br>Title为标题，任意填写即可，将刚刚复制的id_rsa.pub内容粘贴进去，最后点击Add SSH Key。<br>在git bash中检测GitHub公钥是否成功，输入ssh <a href="mailto:&#103;&#x69;&#116;&#x40;&#103;&#x69;&#x74;&#x68;&#117;&#x62;&#x2e;&#99;&#x6f;&#x6d;">&#103;&#x69;&#116;&#x40;&#103;&#x69;&#x74;&#x68;&#117;&#x62;&#x2e;&#99;&#x6f;&#x6d;</a><br>这里之所以设置GitHub密钥的原因是，通过非对称加密的公钥与私钥来完成加密，公钥放置在github上，私钥放置在自己的电脑里。github要求每次推送代码都是合法用户，所以每次推送都要输入账号密码验证推送用户是否合法用户，为了省去每次输入密码的步骤，采用ssh，当你推送的时候，git就会匹配你的私钥跟github上面的公钥是否是配对的，若是匹配就认为你是合法用户，则允许推送。</p>
-<h3 id="3-安装Node-js"><a href="#3-安装Node-js" class="headerlink" title="3.安装Node.js"></a>3.安装Node.js</h3><p>Hexo基于Node.js，<a target="_blank" rel="noopener" href="https://nodejs.org/en/download/">Node.js下载地址</a>，注意安装node.js会包含环境变量及npm的安装，安装后，检测node.js是否安装成功，在命令行输入node -v，检测npm是否安装成功，npm -v<br>到这儿，安装Hexo的环境已经全部搭建完成。</p>
-<h3 id="4-安装Hexo"><a href="#4-安装Hexo" class="headerlink" title="4.安装Hexo"></a>4.安装Hexo</h3><p>hexo就是我们的个人博客网站的框架，这里需要自己在电脑里创建一个文件夹，可以命名为Blog，Hexo框架与以后你自己发布的网页都在这个文件夹中，创建好后，进入文件夹中，打开命令行窗口。<br>使用npm命令安装Hexo，输入：<br>npm install -g hexo-cli<br>这个安装时间较长耐心等待，安装完成后，初始化我们的博客，输入：<br>hexo init blog<br>注意：这里的命令都是作用在刚刚创建的blog文件夹中。<br>在命令行中输入启动命令：<br>hexo server<br>打开浏览器哦网址可以看到网站的样式</p>
-<h3 id="5-推送网站"><a href="#5-推送网站" class="headerlink" title="5.推送网站"></a>5.推送网站</h3><p>上面只是在本地预览，接下来要做的就是推送网站，也就是发布网站，让我们的网站可以被更多人访问到。在设置之前，需要解释一个概念，在blog根目录里的_config.yml文件称为站点配置文件<br>进入themes文件夹，里面也有个_config.yml文件，这个称为主题配置文件<br>现在需要做的是将我们的Hexo和GitHub关联起来，打开站点的配置文件_config.yml，翻到最后修改为：<br>deploy:<br>type: git<br>repo: 这里填入你之前在GitHub上创建仓库的完整历经，记得加上.git<br>branch: master<br>保存站点配置文件。<br>其实就是给hexo d这个命令做相应的配置，让hexo知道你要把blog部署在哪个位置，很显然，我们部署在我们GitHub的仓库里，最后安装git部署插件，输入命令：<br>npm install hexo-deployer-git –save<br>这时，我们分别输入三条命令：<br>hexo clean<br>hexo g<br>hexo d<br>其实第三条hexo d就是部署网站的命令，d是deploy的缩写，完成后，打开浏览器，在地址栏输入你的放置个人网站的仓库路径，你就可以发现你的博客已经上线了，可以在网络上被访问到。</p>
-<h2 id="常用hexo命令及解释"><a href="#常用hexo命令及解释" class="headerlink" title="常用hexo命令及解释"></a>常用hexo命令及解释</h2><p>hexo init [folder]<br>新建一个网站。如果没有设置folder，Hexo默认在目前的文件夹建立网站。<br>本命令相当于执行了以下几步：<br>1.Git clone <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo-starter">hexo-starter</a>和<a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo-theme-landscape">hexo-theme-landscape</a>主题到当前目录或者指定目录<br>2.使用<a target="_blank" rel="noopener" href="https://classic.yarnpkg.com/lang/en/">Yarn 1</a>、<a target="_blank" rel="noopener" href="https://pnpm.js.org/">pnpm</a>或者<a target="_blank" rel="noopener" href="https://docs.npmjs.com/cli/install">npm</a>包管理器下载依赖（如有已安装多个，则列在前面的优先）。npm默认随<a target="_blank" rel="noopener" href="https://hexo.io/docs/#Install-Node-js">Node.js</a>安装。</p>
-<p>hexo new [layout] &lt;title&gt;<br>新建一篇文章。如果没有设置layout的话，默认使用_config.yml中的default_layout参数代替，如果标题包含空格的话，请使用引号括起来。<br>默认情况下，Hexo会使用文章的标题来决定文章文件的路径。对于独立页面来说，Hexo会创建一个以标题为名字的目录，并在目录中放置一个index.md文件。你可以使用–path参数覆盖上述行为、自行决定文件的目录：<br>hexo new page –path about&#x2F;me “About me”<br>以上命令会创建一个source&#x2F;about&#x2F;me.md，同时me.md的Front Matter中的title为“page”。这是因为在上述命令中，hexo-cli将page视为指定文章的标题，并采用默认的layout</p>
-<p>hexo generate<br>生成静态文件。</p>
-<p>hexo publish [layout] &lt;filename&gt;<br>发表草稿</p>
-<p>hexo server<br>启动服务器，默认情况下，访问地址为：<br><a target="_blank" rel="noopener" href="http://localhost:4000/%E3%80%82">http://localhost:4000/。</a></p>
-<p>hexo deploy<br>部署网站。</p>
-<p>hexo clean<br>清楚缓存文件（db.json）和已生成的静态文件（public)。在某些情况下（尤其是更换主题后）,如果发现您对站点的更改无论如何也不生效，您可能需要运行该命令。</p>
-<p>hexo list &lt;type&gt;<br>列出网站资料</p>
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><p>hexo –safe<br>在安全模式下，不会载入插件和脚本。当您在安装新插件遭遇问题时，可以尝试以安全模式重新执行。</p>
-<p>hexo –debug<br>在终端中显示调试信息并记录到debug.log。当您碰到问题时，可以尝试用调试模式重新执行一次，并<a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues/new">提交调式信息到GitHub</a>.</p>
-<p>hexo –silent<br>隐藏终端信息。</p>
-<p>更多详情可以查看<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/26625249">此篇文档</a></p>
+        <p>函数响应式编程是一种编程范式。我们常见的编程范式由命令式编程、函数式编程和逻辑式编程。我们常见的面向对象编程是一种命令式编程。命令式编程是面向计算机硬件的抽象，<br>有变量、赋值语句、表达式和控制语句。而函数式编程是面向数学的抽象，将计算描述为一种表达式求职，函数可以在任何地方定义，并且可以对函数进行组合。<br>响应式编程是一种面向数据流和变化传播的编程范式，数据更新是相关联的。把函数式编程里的一套思路和响应式编程合起来就是函数响应式编程。<br>在Android开发中使用函数响应式编程的主要有两大框架：一个是RxJava，另一个是Google推出的Agera。</p>
+<p>RxJava是ReactiveX的一种Java实现，ReactiveX是Reactive Extensions的缩写，一般简写为Rx。<br>微软的定义是：Rx是一个函数库，让开发者可以利用可观察序列和LINQ风格查询操作符来编写异步和基于事件的程序。开发者可以用Observables表示异步数据流，用<br>LINQ操作符查询一部数据流，用Schedulers参数化一部数据流的并发处理，Rx可以这样定义：Rx &#x3D; Observables+LINQ+Schedulers。</p>
+<p>1.为何要用RxJava<br>说到异步操作，我们会想到Android的AsyncTask和Handler。但是随着请求的数量越来越多，代码逻辑将会变得越来越复杂而RxJava却仍旧能保持清晰的逻辑。<br>RxJava的原理就是创建一个Observable对象来干活，然后使用各种操作符建立起来的链式操作，就如同流水线一样，把你想要处理的数据一步一步地加工成你<br>想要的成品，然后发射给Subscriber处理</p>
+<p>2.RxJava与观察者模式<br>RxJava的异步操作是通过扩展的观察者模式来实现的。RxJava有4个角色Observable、Observer、Subscriber和Suject，这4个角色后面会具体讲解。<br>Observable和Observer 通过subscribe方法实现订阅关系，Observable就可以在需要的时候通知Observer</p>
+<p>3.RxJava的基本实现<br>1）创建Observer(观察者)<br>它决定事件触发的时候将有怎样的行为，其中onCompleted、onError和onNext是必须要实现的方法。<br>2）创建Observable(被观察者)<br>它决定什么时候触发事件以及触发怎样的事件。RxJava使用create方法，just方法，或者from方来创建一个Observable<br>2）Subscribe(订阅)<br>订阅只需要一行代码就可以了<br>observable.subscribe(subscriber)</p>
+<p>3.Subject<br>subject既可以是一个Observer，也可以是一个Observerable,它是连接Observer和Observerable的桥梁，因此，Subject可以被理解为Subject&#x3D;Observable+Observer。<br>RxJava提供了以下4种Subject:</p>
+<ol>
+<li>PublishSubject<br>publishsubject只会把在订阅发生的事件点之后来自原始Observable的数据发生给观察者。如果要确保来自原始Observable的所有数据都被分发，<br>则可以当所有观察者都已经订阅时才开始发射数据，或者改用ReplaySubject。<br>2）BehaviorSubject<br>当Observer订阅BehaviorSubject时，它开始发射原始Observable最近发射的数据<br>3）ReplaySubject<br>不管Observer何时订阅ReplaySubject，ReplaySubject均会发射所有来自原始Observable的数据给Observer。如果使用ReplaySubject作为Observer，注意不要在多个线程中调用onNext、onComplete和onError方法。这可能会导致顺序错乱，并且违反了Observer规则。<br>4）AsyncSubject<br>当Observable完成时，AsyncSubject只会发射来自原始Observable的最后一个数据</li>
+</ol>
+<p>4.RxJava操作符<br>RxJava操作符的类型分为创建操作符、变换操作符、过滤操作符、组合操作符、错误处理操作符、辅助操作符、条件和布尔操作符、算术和聚合操作符及连接操作符等，<br>而这些操作符类型下又有很多操作符，每个操作符可能还有很多变体。</p>
+<p>创建操作符：create,just,from,defer,range,interval,start,repeat,timer<br>变换操作符：map,flatMap,concatMap,switchMap等<br>过滤操作符：filter,elementAt,distince,skip,take<br>组合操作符：startWith,merge,concat,zip</p>
 
       
     </div>
@@ -413,7 +382,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/hexo/" rel="tag"># hexo</a>
+            <a href="/tags/RxJava/" rel="tag"># RxJava</a>
           
         </div>
       
@@ -426,15 +395,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2023/04/30/View%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91%E6%9C%BA%E5%88%B6/" rel="next" title="View的事件分发机制">
+                <i class="fa fa-chevron-left"></i> View的事件分发机制
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2022/09/21/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/" rel="prev" title="深入理解进程和线程">
-                深入理解进程和线程 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -486,17 +455,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -571,22 +531,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFhexo%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">什么是hexo？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFgithub%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">什么是github？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%AD%E5%BB%BA%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">搭建步骤：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-GitHub%E5%88%9B%E5%BB%BA%E4%B8%AA%E4%BA%BA%E4%BB%93%E5%BA%93"><span class="nav-number">3.1.</span> <span class="nav-text">1.GitHub创建个人仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AE%89%E8%A3%85git"><span class="nav-number">3.2.</span> <span class="nav-text">2.安装git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%AE%89%E8%A3%85Node-js"><span class="nav-number">3.3.</span> <span class="nav-text">3.安装Node.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%AE%89%E8%A3%85Hexo"><span class="nav-number">3.4.</span> <span class="nav-text">4.安装Hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E6%8E%A8%E9%80%81%E7%BD%91%E7%AB%99"><span class="nav-number">3.5.</span> <span class="nav-text">5.推送网站</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8hexo%E5%91%BD%E4%BB%A4%E5%8F%8A%E8%A7%A3%E9%87%8A"><span class="nav-number">4.</span> <span class="nav-text">常用hexo命令及解释</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%89%E9%A1%B9"><span class="nav-number">4.1.</span> <span class="nav-text">选项</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
